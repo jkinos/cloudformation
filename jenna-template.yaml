@@ -26,4 +26,10 @@ Resources:
       - LoadBalancerPort: '80'
         InstancePort: '80'
         Protocol: HTTP
+  JennanEC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: jennanEC2securityGroup
+
+
 

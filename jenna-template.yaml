@@ -3,3 +3,5 @@ Description: Academy Demo CloudFormation
 Resources:
   JennanS3Ampari:
     Type: AWS::S3::Bucket
+  JennanJono:
+    Type: AWS::SQS::Queue

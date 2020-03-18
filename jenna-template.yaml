@@ -14,8 +14,10 @@ Outputs:
 Resources:
   JennanS3Ampari:
     Type: AWS::S3::Bucket
+
   JennanJono:
     Type: AWS::SQS::Queue
+
   JennanEC2masiina:
     Type: AWS::EC2::Instance
     Properties:
@@ -23,6 +25,7 @@ Resources:
       InstanceType: t2.micro
       SecurityGroups:
         - !Ref JennanEC2SecurityGroup
+
   JennanLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
@@ -32,10 +35,27 @@ Resources:
       - LoadBalancerPort: '80'
         InstancePort: '80'
         Protocol: HTTP
+      SecurityGroups:
+        - !Ref JennanLoadBalancerSecurityGroup
+
   JennanEC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: jennanEC2securityGroup
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref JennanLoadBalancerSecurityGroup
+
+  JennanLoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: jennanLoadBalancersecurityGroup
+      VpcId: vpc-bcd4e6c6
+
+
+
 
 
 

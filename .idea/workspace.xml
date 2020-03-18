@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825193f0-c04e-4836-b4c6-1307e7fb1018" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jenna-template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/jenna-template.yaml" afterDir="false" />
     </list>
@@ -66,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584518772419</updated>
-      <workItem from="1584518778101" duration="3447000" />
+      <workItem from="1584518778101" duration="4712000" />
     </task>
     <servers />
   </component>

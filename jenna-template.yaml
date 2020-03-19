@@ -37,6 +37,8 @@ Resources:
         Protocol: HTTP
       SecurityGroups:
         - !Ref JennanLoadBalancerSecurityGroup
+      Instances:
+        - !Ref JennanEC2masiina
 
   JennanEC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup

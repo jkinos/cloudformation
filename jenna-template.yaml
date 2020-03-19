@@ -9,7 +9,7 @@ Parameters:
 Outputs:
   ElasticLoadBalancerDNSnimi:
     Description: JennanLoadBalancerinDNS
-    Value: !GetAtt JennanLoadBalancer.DNSName
+    Value: !GetAtt JennanLoadBalancerV2.DNSName
 
 Resources:
   JennanS3Ampari:
@@ -26,19 +26,16 @@ Resources:
       SecurityGroups:
         - !Ref JennanEC2SecurityGroup
 
-  JennanLoadBalancer:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
+  JennanLoadBalancerV2:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      AvailabilityZones:
-      - "us-east-1a"
-      Listeners:
-      - LoadBalancerPort: '80'
-        InstancePort: '80'
-        Protocol: HTTP
+      Scheme: internet-facing
+      Subnets:
+        - subnet-3bfa1864
+        - subnet-7a917d5b
       SecurityGroups:
-        - !Ref JennanLoadBalancerSecurityGroup
-      Instances:
-        - !Ref JennanEC2masiina
+        - !Ref JennanLoadBalancerV2SecurityGroup
+
 
   JennanEC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -48,13 +45,14 @@ Resources:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          SourceSecurityGroupId: !Ref JennanLoadBalancerSecurityGroup
+          SourceSecurityGroupId: !Ref JennanLoadBalancerV2SecurityGroup
 
-  JennanLoadBalancerSecurityGroup:
+  JennanLoadBalancerV2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: jennanLoadBalancersecurityGroup
       VpcId: vpc-bcd4e6c6
+
 
 
 

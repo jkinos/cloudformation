@@ -71,11 +71,36 @@ Resources:
       VpcId: vpc-bcd4e6c6
       TargetType: instance
 
-  JennanAutoScalingGroup:
+  JennanAutoScalingGrouppi:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones:
+        - "us-east-1a"
+        - "us-east-1b"
+        - "us-east-1c"
+      LaunchConfigurationName:
+        Ref: "JennanAutoScalingGroupLauch"
+      MaxSize: 3
+      MinSize: 1
+      TargetGroupARNs:
+        - Ref: "JennanLoadbalancerTargetGroup"
+
+
+  JennanAutoScalingGroupLauch:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref JennanEC2SecurityGroup
+      UserData:
+        Fn::Base64:
+          Fn::Join:
+            - "\n"
+            - - "#!/bin/bash"
+              - "amazon-linux-extras install epel"
+              - "amazon-linux-extras install nginx1"
+              - "systemctl start nginx"
 
 
 

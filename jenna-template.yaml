@@ -18,13 +18,13 @@ Resources:
   JennanJono:
     Type: AWS::SQS::Queue
 
-  JennanEC2masiina:
-    Type: AWS::EC2::Instance
-    Properties:
-      ImageId: !Ref LatestAmiId
-      InstanceType: t2.micro
-      SecurityGroups:
-        - !Ref JennanEC2SecurityGroup
+#  JennanEC2masiina:
+#    Type: AWS::EC2::Instance
+#    Properties:
+#      ImageId: !Ref LatestAmiId
+#      InstanceType: t2.micro
+#      SecurityGroups:
+#        - !Ref JennanEC2SecurityGroup
 
   JennanLoadBalancerV2:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -71,8 +71,11 @@ Resources:
       VpcId: vpc-bcd4e6c6
       TargetType: instance
 
-
-
+  JennanAutoScalingGroup:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: t2.micro
 
 
 

@@ -53,6 +53,28 @@ Resources:
       GroupDescription: jennanLoadBalancersecurityGroup
       VpcId: vpc-bcd4e6c6
 
+  JennanLoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: 'forward'
+          TargetGroupArn: !Ref JennanLoadbalancerTargetGroup
+      LoadBalancerArn: !Ref JennanLoadBalancerV2
+      Port: '80'
+      Protocol: HTTP
+
+  JennanLoadbalancerTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: '80'
+      Protocol: HTTP
+      VpcId: vpc-bcd4e6c6
+      TargetType: instance
+
+
+
+
+
 
 
 
